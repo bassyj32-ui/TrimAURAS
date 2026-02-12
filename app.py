@@ -49,8 +49,11 @@ st.markdown("""
 # Load or Initialize API Key
 if "gemini_api_key" not in st.session_state:
     st.session_state.gemini_api_key = ""
-    # Try to load from .env file
-    if os.path.exists(".env"):
+    # 1. Try to load from Streamlit Secrets (for Cloud Deployment)
+    if "GEMINI_API_KEY" in st.secrets:
+        st.session_state.gemini_api_key = st.secrets["GEMINI_API_KEY"]
+    # 2. Try to load from .env file (for Local Use)
+    elif os.path.exists(".env"):
         with open(".env", "r") as f:
             for line in f:
                 if line.startswith("GEMINI_API_KEY="):
