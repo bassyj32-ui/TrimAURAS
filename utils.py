@@ -52,7 +52,8 @@ def get_transcript(url):
 
 def analyze_transcript(api_key, transcript):
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Use gemini-1.5-flash-latest for better compatibility
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
     
     prompt = f"""
     Analyze the following video transcript and find 3 engaging segments under 60 seconds each.
